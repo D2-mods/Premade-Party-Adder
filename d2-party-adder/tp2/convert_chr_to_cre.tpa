@@ -1,0 +1,154 @@
+//converts a chr file to a cre file
+//can be used as PATCH or ACTION
+//currently supports EEs, BG1, BG2, and IWD
+
+/*functions:
+convert_chr_to_cre
+*/
+
+////////////////////////////////////////////////////////////
+
+//PATCH function: removes CHR header from current file, leaving the CRE file
+//does not change file extension (do that with COPY or COPY_EXISTING)
+//optional: return character's name to use as text for something else
+
+DEFINE_PATCH_FUNCTION convert_chr_to_cre
+ 
+  RET  name
+ 
+BEGIN
+
+  PATCH_IF ((GAME_INCLUDES ~bg1~) OR
+            (GAME_INCLUDES ~bg2~) OR
+            (GAME_INCLUDES ~iwd~) OR
+            (GAME_IS ~pstee ca~ )) BEGIN
+			
+    READ_ASCII 0x8 name (32) NULL    // copy CHR name to %name%
+	
+    DELETE_BYTES 0x62 2    // remove CHR header
+    DELETE_BYTES 0x60 2
+    DELETE_BYTES 0x5e 2
+    DELETE_BYTES 0x5c 2
+    DELETE_BYTES 0x5a 2
+    DELETE_BYTES 0x58 2
+    DELETE_BYTES 0x50 8
+    DELETE_BYTES 0x48 8
+    DELETE_BYTES 0x40 8
+    DELETE_BYTES 0x3e 2
+    DELETE_BYTES 0x3c 2
+    DELETE_BYTES 0x3a 2
+    DELETE_BYTES 0x38 2
+    DELETE_BYTES 0x36 2
+    DELETE_BYTES 0x34 2
+    DELETE_BYTES 0x32 2
+    DELETE_BYTES 0x30 2
+    DELETE_BYTES 0x2c 4
+    DELETE_BYTES 0x28 4
+    DELETE_BYTES 0x8 32
+    DELETE_BYTES 0x4 4
+    DELETE_BYTES 0x0 4
+
+    SAY 0x8 ~%name%~    // CRE name
+    SAY 0xc ~%name%~    // CRE tooltip 
+	
+  END
+  
+END
+
+////////////////////////////////////////////////////////////
+
+//ACTION function: converts CHR to a CRE file (including extension)
+//source file can be in characters folder or in BIFFs/override
+
+DEFINE_ACTION_FUNCTION convert_chr_to_cre
+
+  STR_VAR chr = ~~    // resname to STO file
+  
+  RET  name
+   
+BEGIN
+
+ACTION_IF (FILE_EXISTS ~%USER_DIRECTORY%/characters/%chr%.CHR~) BEGIN
+  COPY ~%USER_DIRECTORY%/characters/%chr%.CHR~ ~override/%chr%.CRE~
+    PATCH_IF ((GAME_INCLUDES ~bg1~) OR
+              (GAME_INCLUDES ~bg2~) OR
+              (GAME_INCLUDES ~iwd~) OR
+              (GAME_IS ~pstee ca~ )) BEGIN
+			
+      READ_ASCII 0x8 name (32) NULL    // copy CHR name to %name%
+	
+      DELETE_BYTES 0x62 2    // remove CHR header
+      DELETE_BYTES 0x60 2
+      DELETE_BYTES 0x5e 2
+      DELETE_BYTES 0x5c 2
+      DELETE_BYTES 0x5a 2
+      DELETE_BYTES 0x58 2
+      DELETE_BYTES 0x50 8
+      DELETE_BYTES 0x48 8
+      DELETE_BYTES 0x40 8
+      DELETE_BYTES 0x3e 2
+      DELETE_BYTES 0x3c 2
+      DELETE_BYTES 0x3a 2
+      DELETE_BYTES 0x38 2
+      DELETE_BYTES 0x36 2
+      DELETE_BYTES 0x34 2
+      DELETE_BYTES 0x32 2
+      DELETE_BYTES 0x30 2
+      DELETE_BYTES 0x2c 4
+      DELETE_BYTES 0x28 4
+      DELETE_BYTES 0x8 32
+      DELETE_BYTES 0x4 4
+      DELETE_BYTES 0x0 4
+	
+      SAY 0x8 ~%name%~    // CRE name
+      SAY 0xc ~%name%~    // CRE tooltip 
+	
+    END
+  BUT_ONLY
+END
+
+
+ACTION_IF ((FILE_EXISTS_IN_GAME ~%chr%.CHR~) AND
+           !(FILE_EXISTS ~%USER_DIRECTORY%/characters/%chr%.CHR~)) BEGIN
+  COPY_EXISTING ~%chr%.CHR~ ~override/%chr%.CRE~
+    PATCH_IF ((GAME_INCLUDES ~bg1~) OR
+              (GAME_INCLUDES ~bg2~) OR
+              (GAME_INCLUDES ~iwd~) OR
+              (GAME_IS ~pstee~) OR
+              (GAME_IS ~ca~ )) BEGIN
+			
+      READ_ASCII 0x8 name (32) NULL    // copy CHR name to %name%
+	
+      DELETE_BYTES 0x62 2    // remove CHR header
+      DELETE_BYTES 0x60 2
+      DELETE_BYTES 0x5e 2
+      DELETE_BYTES 0x5c 2
+      DELETE_BYTES 0x5a 2
+      DELETE_BYTES 0x58 2
+      DELETE_BYTES 0x50 8
+      DELETE_BYTES 0x48 8
+      DELETE_BYTES 0x40 8
+      DELETE_BYTES 0x3e 2
+      DELETE_BYTES 0x3c 2
+      DELETE_BYTES 0x3a 2
+      DELETE_BYTES 0x38 2
+      DELETE_BYTES 0x36 2
+      DELETE_BYTES 0x34 2
+      DELETE_BYTES 0x32 2
+      DELETE_BYTES 0x30 2
+      DELETE_BYTES 0x2c 4
+      DELETE_BYTES 0x28 4
+      DELETE_BYTES 0x8 32
+      DELETE_BYTES 0x4 4
+      DELETE_BYTES 0x0 4
+	
+      SAY 0x8 ~%name%~    // CRE name
+      SAY 0xc ~%name%~    // CRE tooltip 
+	
+    END
+  BUT_ONLY
+END
+
+END
+
+////////////////////////////////////////////////////////////

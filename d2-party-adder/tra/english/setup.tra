@@ -1,0 +1,17 @@
+//Setup
+@1 = ~Choose a party for IWD~
+@2 = ~Party 1~
+@3 = ~Party 2~
+@4 = ~Party 3~
+@5 = ~Party 4~
+@6 = ~Remove default party~
+@7 = ~This component is for IWD:EE~
+@8 = ~Choose a party for HoW~
+@9 = ~This component is for IWD:EE~
+@10 = ~Choose a party for The Black Pits~
+@11 = ~This component is for BG:EE, BG2:EE, and EET~
+@12 = ~Patch CHR files to fix biography bug when importing (IWD:EE)~
+
+
+//Biography (from Black Pits 2)
+@99 = ~%name%... you wanted to be an adventurer for as long as you can remember. Even as a small child, you knew there was a vast world beyond the simple life you witnessed around you every day. Traveling bards fanned the flames of your determination to escape your mundane existence with tales of dragons and monsters, wizards and knights, legendary heroes and infamous villains. And you knew then that one day your deeds... your name... would be known throughout the realms.~

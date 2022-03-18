@@ -1,0 +1,141 @@
+BACKUP ~d2-party-adder/backup~
+AUTHOR ~Dan_P~
+VERSION ~1.0~
+
+ALWAYS
+  INCLUDE ~%MOD_FOLDER%/tp2/convert_chr_to_cre.tpa~
+END
+
+LANGUAGE ~English~
+         ~english~
+         ~d2-party-adder/tra/english/setup.tra~
+		 
+		 
+////////////////////////////////////////////////////////////
+
+//Choose a party for IWD
+
+BEGIN @2
+DESIGNATED 10
+REQUIRE_PREDICATE GAME_IS ~iwdee~ @7
+SUBCOMPONENT @1
+LABEL ~D2-IWDEE-PARTY1~
+OUTER_TEXT_SPRINT party ~party1~
+OUTER_TEXT_SPRINT game ~iwd~
+INCLUDE ~%MOD_FOLDER%/tp2/install.tph~
+
+BEGIN @3
+SUBCOMPONENT @1
+LABEL ~D2-IWDEE-PARTY2~
+OUTER_TEXT_SPRINT party ~party2~
+OUTER_TEXT_SPRINT game ~iwd~
+INCLUDE ~%MOD_FOLDER%/tp2/install.tph~
+
+BEGIN @4
+SUBCOMPONENT @1
+LABEL ~D2-IWDEE-PARTY3~
+OUTER_TEXT_SPRINT party ~party3~
+OUTER_TEXT_SPRINT game ~iwd~
+INCLUDE ~%MOD_FOLDER%/tp2/install.tph~
+
+BEGIN @5
+SUBCOMPONENT @1
+LABEL ~D2-IWDEE-PARTY4~
+OUTER_TEXT_SPRINT party ~party4~
+OUTER_TEXT_SPRINT game ~iwd~
+INCLUDE ~%MOD_FOLDER%/tp2/install.tph~
+
+BEGIN @6
+SUBCOMPONENT @1
+LABEL ~D2-IWDEE-PARTY0~
+COPY ~%MOD_FOLDER%/addparty.2DA~ ~override/IWDPARTY.2DA~    // copy 2da (lines removed)
+
+////////////////////////////////////////////////////////////
+
+//Choose a party for HoW
+
+BEGIN @2
+DESIGNATED 20
+REQUIRE_PREDICATE GAME_IS ~iwdee~ @9
+SUBCOMPONENT @8
+LABEL ~D2-IWDEE-HPARTY1~
+OUTER_TEXT_SPRINT party ~party1~
+OUTER_TEXT_SPRINT game ~how~
+INCLUDE ~%MOD_FOLDER%/tp2/install.tph~
+
+BEGIN @3
+SUBCOMPONENT @8
+LABEL ~D2-IWDEE-HPARTY2~
+OUTER_TEXT_SPRINT party ~party2~
+OUTER_TEXT_SPRINT game ~how~
+INCLUDE ~%MOD_FOLDER%/tp2/install.tph~
+
+BEGIN @4
+SUBCOMPONENT @8
+LABEL ~D2-IWDEE-HPARTY3~
+OUTER_TEXT_SPRINT party ~party3~
+OUTER_TEXT_SPRINT game ~how~
+INCLUDE ~%MOD_FOLDER%/tp2/install.tph~
+
+BEGIN @5
+SUBCOMPONENT @8
+LABEL ~D2-IWDEE-HPARTY4~
+OUTER_TEXT_SPRINT party ~party4~
+OUTER_TEXT_SPRINT game ~how~
+INCLUDE ~%MOD_FOLDER%/tp2/install.tph~
+
+BEGIN @6
+SUBCOMPONENT @8
+LABEL ~D2-IWDEE-HPARTY0~
+COPY ~%MOD_FOLDER%/addparty.2DA~ ~override/HOWPARTY.2DA~    // copy 2da (lines removed)
+
+////////////////////////////////////////////////////////////
+
+//Choose a party for The Black Pits
+
+BEGIN @2
+DESIGNATED 30
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet~ @11
+SUBCOMPONENT @10
+LABEL ~D2-BGEE-BPPARTY1~
+OUTER_TEXT_SPRINT party ~bpparty1~
+OUTER_TEXT_SPRINT game ~tbp~
+INCLUDE ~%MOD_FOLDER%/tp2/install.tph~
+
+BEGIN @3
+SUBCOMPONENT @10
+LABEL ~D2-BGEE-BPPARTY2~
+OUTER_TEXT_SPRINT party ~bpparty2~
+OUTER_TEXT_SPRINT game ~tbp~
+INCLUDE ~%MOD_FOLDER%/tp2/install.tph~
+
+BEGIN @4
+SUBCOMPONENT @10
+LABEL ~D2-BGEE-BPPARTY3~
+OUTER_TEXT_SPRINT party ~bpparty3~
+OUTER_TEXT_SPRINT game ~tbp~
+INCLUDE ~%MOD_FOLDER%/tp2/install.tph~
+
+BEGIN @5
+SUBCOMPONENT @10
+LABEL ~D2-BGEE-BPPARTY4~
+OUTER_TEXT_SPRINT party ~bpparty4~
+OUTER_TEXT_SPRINT game ~tbp~
+INCLUDE ~%MOD_FOLDER%/tp2/install.tph~
+
+BEGIN @6
+SUBCOMPONENT @10
+LABEL ~D2-BGEE-BPPARTY0~
+COPY ~%MOD_FOLDER%/addparty.2DA~ ~override/tbpparty.2DA~    // copy 2da (lines removed)
+
+////////////////////////////////////////////////////////////
+
+//Patch CHR files to fix biography bug when importing (IWD:EE)
+
+BEGIN @12
+DESIGNATED 99
+REQUIRE_PREDICATE GAME_IS ~iwdee~ @7
+LABEL ~D2-IWDEE-BIOFIX~
+INCLUDE ~%MOD_FOLDER%/tp2/biofix.tph~
+
+////////////////////////////////////////////////////////////
