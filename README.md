@@ -38,15 +38,15 @@ Black Pits note: Only the premade party will have custom biographies. Imported c
 <details>
   <summary>Biography bug (IWD:EE)</summary>
   
-This mod fixes the bug that causes imported characters to start with the BG2 biography. This is done by default for characters added to premade parties. A separate component lets you patch all CHR files in the characters folder.
+- This mod fixes the bug that causes imported characters to start with the BG2 biography. This is done by default for characters added to premade parties. A separate component lets you patch all CHR files in the characters folder.
 
-This will also delete any BIO files in the folder (required to prevent the bug). The biographies are written directly into the CHR files instead. Characters without a BIO file will get the generic biography from Black Pits 2, but only if the CHR file doesn't already have a custom biography written in.
+- This will also delete any BIO files in the folder (required to prevent the bug). The biographies are written directly into the CHR files instead. Characters without a BIO file will get the generic biography from Black Pits 2, but only if the CHR file doesn't already have a custom biography written in.
 
-It's not completely bug-free. To avoid issues, don't open up the biography screens before starting the game (the status screens are fine). Once you're in the game, you can view any screens without issues. I noticed at least two reproducible bugs on the party creation screen, which I'll describe here:
+- It's not completely bug-free. To avoid issues, don't open up the biography screens before starting the game (the status screens are fine). Once you're in the game, you can view any screens without issues. I noticed at least two reproducible bugs on the party creation screen, which I'll describe here:
 
 1. If you view the biography of Player1 (first character in order), then import more characters, then start the game, Player1 will have the BG2 biography.
 2. If you view the biographies of any character other than Player1, then start the game, Player1 will have the same biography as the last character viewed. This bug happens with premade parties as well.
 
-Basically, as long as you don't view biographies while on the party creation screen, there shouldn't usually be issues.
+- Basically, as long as you don't view biographies while on the party creation screen, there shouldn't usually be issues.
 
 </summary>
