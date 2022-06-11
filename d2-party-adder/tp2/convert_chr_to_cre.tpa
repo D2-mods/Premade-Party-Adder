@@ -62,14 +62,14 @@ END
 
 DEFINE_ACTION_FUNCTION convert_chr_to_cre
 
-  STR_VAR chr = ~~    // resname to STO file
+  STR_VAR chr = ~~    // resname of CHR file
   
   RET  name
    
 BEGIN
-
-ACTION_IF (FILE_EXISTS ~%USER_DIRECTORY%/characters/%chr%.CHR~) BEGIN
-  COPY ~%USER_DIRECTORY%/characters/%chr%.CHR~ ~override/%chr%.CRE~
+  
+ACTION_IF (FILE_EXISTS_IN_GAME ~%chr%.CHR~) BEGIN
+  COPY_EXISTING ~%chr%.CHR~ ~override/%chr%.CRE~
     PATCH_IF ((GAME_INCLUDES ~bg1~) OR
               (GAME_INCLUDES ~bg2~) OR
               (GAME_INCLUDES ~iwd~) OR
@@ -108,14 +108,13 @@ ACTION_IF (FILE_EXISTS ~%USER_DIRECTORY%/characters/%chr%.CHR~) BEGIN
 END
 
 
-ACTION_IF ((FILE_EXISTS_IN_GAME ~%chr%.CHR~) AND
-           !(FILE_EXISTS ~%USER_DIRECTORY%/characters/%chr%.CHR~)) BEGIN
-  COPY_EXISTING ~%chr%.CHR~ ~override/%chr%.CRE~
+ACTION_IF (!(FILE_EXISTS_IN_GAME ~%chr%.CHR~) AND
+           (FILE_EXISTS ~%USER_DIRECTORY%/characters/%chr%.CHR~)) BEGIN
+  COPY ~%USER_DIRECTORY%/characters/%chr%.CHR~ ~override/%chr%.CRE~
     PATCH_IF ((GAME_INCLUDES ~bg1~) OR
               (GAME_INCLUDES ~bg2~) OR
               (GAME_INCLUDES ~iwd~) OR
-              (GAME_IS ~pstee~) OR
-              (GAME_IS ~ca~ )) BEGIN
+              (GAME_IS ~pstee ca~ )) BEGIN
 			
       READ_ASCII 0x8 name (32) NULL    // copy CHR name to %name%
 	

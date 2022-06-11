@@ -2,18 +2,18 @@ ACTION_BASH_FOR ~%USER_DIRECTORY%/characters~ ~.*.CHR~ BEGIN
 
   //store text from BIO file (if it exists)
   ACTION_IF (FILE_EXISTS ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.BIO~) BEGIN
-    COPY ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.BIO~ ~%USER_DIRECTORY%/characters~
+    COPY ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.bio~ ~%USER_DIRECTORY%/characters~
       READ_ASCII 0x0 ~addbio~ (%SOURCE_SIZE%) NULL    // copy text in BIO to %addbio%
   END
   
   //write biography into CHR file
-  COPY ~%BASH_FOR_FILESPEC%~ ~%USER_DIRECTORY%/characters~  
+  COPY ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.chr~ ~%USER_DIRECTORY%/characters~  
     PATCH_IF (FILE_EXISTS ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.BIO~) BEGIN
       SAY 0x230 ~%addbio%~    // use custom biography
     END
     ELSE BEGIN
       READ_ASCII 0x8 name (32) NULL    // copy CHR name to %name% (used in the biography text)
-      READ_LONG 0x230 biotext    // check bio field (READ_LONG to get value)
+      READ_LONG 0x230 biotext    // check BIO field (READ_LONG to get value)
       PATCH_IF (biotext = 15728908) BEGIN    // default entry (invalid strref, reads "Thief")
         SAY 0x230 @99    // use generic biography
       END
@@ -22,7 +22,13 @@ ACTION_BASH_FOR ~%USER_DIRECTORY%/characters~ ~.*.CHR~ BEGIN
 
   //delete BIO file (must be removed to prevent bug)
   ACTION_IF (FILE_EXISTS ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.BIO~) BEGIN
-    DELETE ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.BIO~
+    DELETE ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.bio~
   END
     
+END
+
+
+//add marker to characters folder
+ACTION_IF !(FILE_EXISTS ~%USER_DIRECTORY%/characters/Patched_Biographies~) BEGIN
+  COPY ~%MOD_FOLDER%/addparty.2DA~ ~%USER_DIRECTORY%/characters/Patched_Biographies~
 END

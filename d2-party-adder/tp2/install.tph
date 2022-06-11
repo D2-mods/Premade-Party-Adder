@@ -20,7 +20,7 @@ ACTION_BASH_FOR ~%MOD_FOLDER%/%party%~ ~.*.CHR~ BEGIN
   BUT_ONLY
   
   //copy to characters folder
-  COPY ~%BASH_FOR_FILESPEC%~ ~%USER_DIRECTORY%/characters~
+  COPY ~%BASH_FOR_FILESPEC%~ ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.chr~
     PATCH_IF (FILE_EXISTS ~%MOD_FOLDER%/%party%/%BASH_FOR_RES%.BIO~) BEGIN    // add biography text
       SAY 0x230 ~%addbio%~    // same as BIO offset, but on a CHR file
     END
@@ -31,7 +31,7 @@ ACTION_BASH_FOR ~%MOD_FOLDER%/%party%~ ~.*.CHR~ BEGIN
 
   //delete BIO file from characters folder (does nothing for BG:EE, causes bug with IWD:EE)
   ACTION_IF (FILE_EXISTS ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.BIO~) BEGIN
-    DELETE ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.BIO~
+    DELETE ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.bio~
   END
   
   //set resource names to variable
@@ -97,6 +97,11 @@ END
 //add portrait files (optional)
 ACTION_BASH_FOR ~%MOD_FOLDER%/%party%~ ~.*.BMP~ BEGIN
   COPY ~%BASH_FOR_FILESPEC%~ ~override~
+END
+
+//add marker to characters folder
+ACTION_IF !(FILE_EXISTS ~%USER_DIRECTORY%/characters/Patched_Biographies~) BEGIN
+  COPY ~%MOD_FOLDER%/addparty.2DA~ ~%USER_DIRECTORY%/characters/Patched_Biographies~
 END
 
 CLEAR_MEMORY

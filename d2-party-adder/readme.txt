@@ -56,8 +56,27 @@ Basically, as long as you don't view biographies while on the party creation scr
 
 
 ==================================================
+CREDITS
+==================================================
+Mod Author: Dan_P
+
+Tools and Resources used:
+- WeiDU (https://github.com/WeiDUorg/weidu)
+- NearInfinity (https://github.com/Argent77/NearInfinity)
+- Notepad++ (https://notepad-plus-plus.org/)
+- Git Bash (https://git-scm.com/downloads)
+- Infinity Auto Packager (https://github.com/InfinityTools/InfinityAutoPackager)
+- IESDP (https://gibberlings3.github.io/iesdp/main.htm)
+
+
+==================================================
 Version info
 ==================================================
+v1.1
+- changed backup folder to weidu_external
+- improved tp2 files
+- added marker to characters folder when any component is installed
+
 v1.0 - release version
 v0.5 - fixed biography bug in IWD:EE (for imported characters)
 v0.4 - minor fixes/adjustments
