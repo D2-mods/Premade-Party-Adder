@@ -24,10 +24,10 @@ Folders:
 
 
 #### Optional: 
-- Biographies will also be added (must be same filename). These are just text files with the .BIO extension. Characters without a BIO file will instead get the generic biography used for Black Pits 2, with the addition of their name. It works well enough for any class. Note that the biographies are written directly into the CRE/CHR files (i.e. not added to the characters folder).
+- Biographies will also be added. These are just text files with the .BIO extension. They must have the same filename as the CHR file. Characters without a BIO file will instead get the generic biography used for Black Pits 2. It works well enough for any class. Note that the biographies are written directly into the CRE/CHR files (i.e. not added as a separate file to the characters folder).
 - Portraits in the folder will be copied to the override (though not made selectable at character creation). This does not conflict with my Portrait Gender Separator mod, unless you have different portraits with the same filename.
 
-Black Pits note: Only the premade party will have custom biographies. Imported characters will get the normal BG story-related biography. This happens with or without a BIO file in the characters folder, and even if the biography is written into the CHR file.
+Black Pits note: Only the premade party will have custom biographies. Imported characters will get the normal BG story-related biography.
 
 
 #### Additional info:
@@ -38,6 +38,8 @@ Black Pits note: Only the premade party will have custom biographies. Imported c
 <details>
   <summary>Biography bug (IWD:EE)</summary>
   
+---
+
 - This mod fixes the bug that causes imported characters to start with the BG2 biography. This is done by default for characters added to premade parties. A separate component lets you patch all CHR files in the characters folder.
 
 - This will also delete any BIO files in the folder (required to prevent the bug). The biographies are written directly into the CHR files instead. Characters without a BIO file will get the generic biography from Black Pits 2, but only if the CHR file doesn't already have a custom biography written in.
@@ -48,5 +50,7 @@ Black Pits note: Only the premade party will have custom biographies. Imported c
 2. If you view the biographies of any character other than Player1, then start the game, Player1 will have the same biography as the last character viewed. This bug happens with premade parties as well.
 
 - Basically, as long as you don't view biographies while on the party creation screen, there shouldn't usually be issues.
+
+---
 
 </summary>

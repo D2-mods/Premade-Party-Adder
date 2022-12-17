@@ -17,6 +17,7 @@ IWDEE: There's also a component to fix the bug where imported characters could s
 Installation
 ==================================================
 - Place up to 6 CHR files in one of the party folders
+- Optional: Add biography and/or portrait files to the folder
 - Run the installer
 - Select party from the list
 - CRE files are added to the override (these are what's used for the premade parties)
@@ -27,10 +28,10 @@ Folders:
 - bpparty => Black Pits
 
 Optional: 
-- Biographies will also be added (must be same filename). These are just text files with the .BIO extension. Characters without a BIO file will instead get the generic biography used for Black Pits 2, with the addition of their name. It works well enough for any class. Note that the biographies are written directly into the CRE/CHR files (i.e. not added to the characters folder).
+- Biographies will also be added. These are just text files with the .BIO extension. They must have the same filename as the CHR file. Characters without a BIO file will instead get the generic biography used for Black Pits 2. It works well enough for any class. Note that the biographies are written directly into the CRE/CHR files (i.e. not added as a separate file to the characters folder).
 - Portraits in the folder will be copied to the override (though not made selectable at character creation). This does not conflict with my Portrait Gender Separator mod, unless you have different portraits with the same filename.
 
-Black Pits note: Only the premade party will have custom biographies. Imported characters will get the normal BG story-related biography. This happens with or without a BIO file in the characters folder, and even if the biography is written into the CHR file.
+Black Pits note: Only the premade party will have custom biographies. Imported characters will get the normal BG story-related biography.
 
 
 ==================================================
@@ -72,6 +73,10 @@ Tools and Resources used:
 ==================================================
 Version info
 ==================================================
+v1.2
+- Changed name of marker file to make it more clear it's from this mod.
+- Party components will fail to install if no CHR files are in the folder. This won't give a WeiDU error. It'll just say "INSTALLATION ABORTED". If using a mod manager, installation will continue uninterrupted.
+
 v1.1
 - changed backup folder to weidu_external
 - improved tp2 files

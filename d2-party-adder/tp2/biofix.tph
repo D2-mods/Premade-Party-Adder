@@ -1,4 +1,4 @@
-ACTION_BASH_FOR ~%USER_DIRECTORY%/characters~ ~.*.CHR~ BEGIN
+ACTION_BASH_FOR ~%USER_DIRECTORY%/characters~ ~.*\.CHR~ BEGIN
 
   //store text from BIO file (if it exists)
   ACTION_IF (FILE_EXISTS ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.BIO~) BEGIN
@@ -29,6 +29,4 @@ END
 
 
 //add marker to characters folder
-ACTION_IF !(FILE_EXISTS ~%USER_DIRECTORY%/characters/Patched_Biographies~) BEGIN
-  COPY ~%MOD_FOLDER%/addparty.2DA~ ~%USER_DIRECTORY%/characters/Patched_Biographies~
-END
+COPY ~%MOD_FOLDER%/addparty.2DA~  ~%USER_DIRECTORY%/characters/d2partyaddermarker~

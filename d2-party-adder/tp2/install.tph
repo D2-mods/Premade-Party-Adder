@@ -1,5 +1,5 @@
 //do stuff for each CHR file
-ACTION_BASH_FOR ~%MOD_FOLDER%/%party%~ ~.*.CHR~ BEGIN
+ACTION_BASH_FOR ~%MOD_FOLDER%/%party%~ ~.*\.CHR~ BEGIN
 
   //store text from BIO file (optional)
   ACTION_IF (FILE_EXISTS ~%MOD_FOLDER%/%party%/%BASH_FOR_RES%.BIO~) BEGIN
@@ -49,6 +49,7 @@ ACTION_BASH_FOR ~%MOD_FOLDER%/%party%~ ~.*.CHR~ BEGIN
   
 END
 
+
 //set blank entry for unused resource slots
 ACTION_IF !(VARIABLE_IS_SET char1) BEGIN OUTER_TEXT_SPRINT char1 ~~ END
 ACTION_IF !(VARIABLE_IS_SET char2) BEGIN OUTER_TEXT_SPRINT char2 ~~ END
@@ -57,51 +58,57 @@ ACTION_IF !(VARIABLE_IS_SET char4) BEGIN OUTER_TEXT_SPRINT char4 ~~ END
 ACTION_IF !(VARIABLE_IS_SET char5) BEGIN OUTER_TEXT_SPRINT char5 ~~ END
 ACTION_IF !(VARIABLE_IS_SET char6) BEGIN OUTER_TEXT_SPRINT char6 ~~ END
 
+
 //edit 2da party list
-ACTION_IF (FILE_EXISTS_IN_GAME ~%game%party.2DA~) BEGIN
-  COPY_EXISTING ~%game%party.2DA~ ~override~
-    SET_2DA_ENTRY_LATER partylist 3 1 ~%char1%~
-    SET_2DA_ENTRY_LATER partylist 4 1 ~%char2%~
-    SET_2DA_ENTRY_LATER partylist 5 1 ~%char3%~
-    SET_2DA_ENTRY_LATER partylist 6 1 ~%char4%~
-    SET_2DA_ENTRY_LATER partylist 7 1 ~%char5%~
-    SET_2DA_ENTRY_LATER partylist 8 1 ~%char6%~
-    SET_2DA_ENTRIES_NOW partylist 1
-    PRETTY_PRINT_2DA
-  BUT_ONLY
+ACTION_IF !(~%char1%~ STRING_EQUAL_CASE ~~) BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~%game%party.2DA~) BEGIN
+    COPY_EXISTING ~%game%party.2DA~ ~override~
+      SET_2DA_ENTRY_LATER partylist 3 1 ~%char1%~
+      SET_2DA_ENTRY_LATER partylist 4 1 ~%char2%~
+      SET_2DA_ENTRY_LATER partylist 5 1 ~%char3%~
+      SET_2DA_ENTRY_LATER partylist 6 1 ~%char4%~
+      SET_2DA_ENTRY_LATER partylist 7 1 ~%char5%~
+      SET_2DA_ENTRY_LATER partylist 8 1 ~%char6%~
+      SET_2DA_ENTRIES_NOW partylist 1
+      PRETTY_PRINT_2DA
+    BUT_ONLY
+  END
+  ELSE BEGIN    // fallback if file doesn't exist
+    COPY ~%MOD_FOLDER%/addparty.2DA~ ~override/%game%party.2DA~
+    APPEND ~%game%party.2DA~ ~0%TAB%%char1%~
+    APPEND ~%game%party.2DA~ ~1%TAB%%char2%~
+    APPEND ~%game%party.2DA~ ~2%TAB%%char3%~
+    APPEND ~%game%party.2DA~ ~3%TAB%%char4%~
+    APPEND ~%game%party.2DA~ ~4%TAB%%char5%~
+    APPEND ~%game%party.2DA~ ~5%TAB%%char6%~
+  END
+
+  ACTION_IF (FILE_EXISTS_IN_GAME ~TBPPART_.2DA~) BEGIN    // EET: edit 2da for Black Pits 1
+    COPY_EXISTING ~TBPPART_.2DA~ ~override~
+      SET_2DA_ENTRY_LATER partylist 3 1 ~%char1%~
+      SET_2DA_ENTRY_LATER partylist 4 1 ~%char2%~
+      SET_2DA_ENTRY_LATER partylist 5 1 ~%char3%~
+      SET_2DA_ENTRY_LATER partylist 6 1 ~%char4%~
+      SET_2DA_ENTRY_LATER partylist 7 1 ~%char5%~
+      SET_2DA_ENTRY_LATER partylist 8 1 ~%char6%~
+      SET_2DA_ENTRIES_NOW partylist 1
+      PRETTY_PRINT_2DA
+    BUT_ONLY
+  END
 END
-ELSE BEGIN    // fallback if file doesn't exist
-  COPY ~%MOD_FOLDER%/addparty.2DA~ ~override/%game%party.2DA~    // copy 2da (lines removed)
-  APPEND ~%game%party.2DA~ ~0%TAB%%char1%~    // add lines to 2da
-  APPEND ~%game%party.2DA~ ~1%TAB%%char2%~
-  APPEND ~%game%party.2DA~ ~2%TAB%%char3%~
-  APPEND ~%game%party.2DA~ ~3%TAB%%char4%~
-  APPEND ~%game%party.2DA~ ~4%TAB%%char5%~
-  APPEND ~%game%party.2DA~ ~5%TAB%%char6%~
+ELSE BEGIN
+  ABORT @11    // "No CHR files in party folder"
 END
 
-//EET: edit 2da for Black Pits 1
-ACTION_IF (FILE_EXISTS_IN_GAME ~TBPPART_.2DA~) BEGIN
-  COPY_EXISTING ~TBPPART_.2DA~ ~override~
-    SET_2DA_ENTRY_LATER partylist 3 1 ~%char1%~
-    SET_2DA_ENTRY_LATER partylist 4 1 ~%char2%~
-    SET_2DA_ENTRY_LATER partylist 5 1 ~%char3%~
-    SET_2DA_ENTRY_LATER partylist 6 1 ~%char4%~
-    SET_2DA_ENTRY_LATER partylist 7 1 ~%char5%~
-    SET_2DA_ENTRY_LATER partylist 8 1 ~%char6%~
-    SET_2DA_ENTRIES_NOW partylist 1
-    PRETTY_PRINT_2DA
-  BUT_ONLY
-END
 
 //add portrait files (optional)
-ACTION_BASH_FOR ~%MOD_FOLDER%/%party%~ ~.*.BMP~ BEGIN
+ACTION_BASH_FOR ~%MOD_FOLDER%/%party%~ ~.*\.BMP~ BEGIN
   COPY ~%BASH_FOR_FILESPEC%~ ~override~
 END
 
+
 //add marker to characters folder
-ACTION_IF !(FILE_EXISTS ~%USER_DIRECTORY%/characters/Patched_Biographies~) BEGIN
-  COPY ~%MOD_FOLDER%/addparty.2DA~ ~%USER_DIRECTORY%/characters/Patched_Biographies~
-END
+COPY ~%MOD_FOLDER%/addparty.2DA~  ~%USER_DIRECTORY%/characters/d2partyaddermarker~
+
 
 CLEAR_MEMORY

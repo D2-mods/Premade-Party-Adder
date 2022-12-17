@@ -5,12 +5,14 @@
 @4 = ~Party 3~
 @5 = ~Party 4~
 @6 = ~Remove default party~
-@7 = ~This component is for IWD:EE~
-@8 = ~Choose a party for HoW~
-@9 = ~This component is for IWD:EE~
-@10 = ~Choose a party for The Black Pits~
-@11 = ~This component is for BG:EE, BG2:EE, and EET~
-@12 = ~Patch CHR files to fix biography bug when importing (IWD:EE)~
+
+@7 = ~Choose a party for HoW~
+@8 = ~Choose a party for The Black Pits~
+@9 = ~Patch CHR files to fix biography bug when importing (IWD:EE)~
+
+@10 = ~Component not available for this game~
+@11 = ~No CHR files in party folder~
+
 
 
 //Biography (from Black Pits 2)
