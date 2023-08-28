@@ -34,6 +34,7 @@ Black Pits note: Only the premade party will have custom biographies. Imported c
 - Characters are added in number/alphabetical order. This is mainly relevant for the first character, who is treated as the protagonist and cannot be kicked from the party. 
 - If there are more than 6 CHR files in the folder, only the first 6 are added to the party (though all will be converted to CRE files in the override).
 
+--
 
 <details>
   <summary>Biography bug (IWD:EE)</summary>

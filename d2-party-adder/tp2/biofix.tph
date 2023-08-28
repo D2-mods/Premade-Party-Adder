@@ -9,14 +9,19 @@ ACTION_BASH_FOR ~%USER_DIRECTORY%/characters~ ~.*\.CHR~ BEGIN
   //write biography into CHR file
   COPY ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.chr~ ~%USER_DIRECTORY%/characters~  
     PATCH_IF (FILE_EXISTS ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.BIO~) BEGIN
-      SAY 0x230 ~%addbio%~    // use custom biography
+      SAY 0x230 ~%addbio%~    // use custom BIO file if exists
     END
     ELSE BEGIN
       READ_ASCII 0x8 name (32) NULL    // copy CHR name to %name% (used in the biography text)
-      READ_LONG 0x230 biotext    // check BIO field (READ_LONG to get value)
-      PATCH_IF (biotext = 15728908) BEGIN    // default entry (invalid strref, reads "Thief")
-        SAY 0x230 @99    // use generic biography
+      READ_LONG 0x230 biotext          // check BIO field (READ_LONG to get numeric value)
+
+      PATCH_IF ((biotext = 15728908) OR    // default entry (invalid strref, reads "Thief")
+                (biotext = ~-1~) OR
+                (biotext > 10000000)
+        ) BEGIN
+        SAY 0x230 @99    // use generic biography (if CHR does not have one written in already)
       END
+
     END
   BUT_ONLY
 

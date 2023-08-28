@@ -57,11 +57,8 @@ Basically, as long as you don't view biographies while on the party creation scr
 
 
 ==================================================
-CREDITS
+Tools and Resources:
 ==================================================
-Mod Author: Dan_P
-
-Tools and Resources used:
 - WeiDU (https://github.com/WeiDUorg/weidu)
 - NearInfinity (https://github.com/Argent77/NearInfinity)
 - Notepad++ (https://notepad-plus-plus.org/)
@@ -73,6 +70,9 @@ Tools and Resources used:
 ==================================================
 Version info
 ==================================================
+v1.3
+- Small update for Component 3 (Biography fix): Fixed an issue that could prevent the generic biography from being written into a CHR file. This would happen if trying to patch a CHR file created with the Export button, but also without a .BIO file (i.e. you deleted the BIO because you wanted the generic biography from this mod). This bug did not affect pregenerated characters, only exported ones.
+
 v1.2
 - Changed name of marker file to make it more clear it's from this mod.
 - Party components will fail to install if no CHR files are in the folder. This won't give a WeiDU error. It'll just say "INSTALLATION ABORTED". If using a mod manager, installation will continue uninterrupted.
