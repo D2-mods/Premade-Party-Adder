@@ -1,14 +1,18 @@
-ACTION_BASH_FOR ~%USER_DIRECTORY%/characters~ ~.*\.CHR~ BEGIN
+//
+//
+
+
+ACTION_BASH_FOR ~%USER_DIRECTORY%/characters~ ~.*\.chr~ BEGIN
 
   //store text from BIO file (if it exists)
-  ACTION_IF (FILE_EXISTS ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.BIO~) BEGIN
+  ACTION_IF (FILE_EXISTS ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.bio~) BEGIN
     COPY ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.bio~ ~%USER_DIRECTORY%/characters~
       READ_ASCII 0x0 ~addbio~ (%SOURCE_SIZE%) NULL    // copy text in BIO to %addbio%
   END
   
   //write biography into CHR file
   COPY ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.chr~ ~%USER_DIRECTORY%/characters~  
-    PATCH_IF (FILE_EXISTS ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.BIO~) BEGIN
+    PATCH_IF (FILE_EXISTS ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.bio~) BEGIN
       SAY 0x230 ~%addbio%~    // use custom BIO file if exists
     END
     ELSE BEGIN
@@ -26,12 +30,14 @@ ACTION_BASH_FOR ~%USER_DIRECTORY%/characters~ ~.*\.CHR~ BEGIN
   BUT_ONLY
 
   //delete BIO file (must be removed to prevent bug)
-  ACTION_IF (FILE_EXISTS ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.BIO~) BEGIN
+  ACTION_IF (FILE_EXISTS ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.bio~) BEGIN
     DELETE ~%USER_DIRECTORY%/characters/%BASH_FOR_RES%.bio~
   END
     
 END
 
+LAF addmarker END
 
-//add marker to characters folder
-COPY ~%MOD_FOLDER%/addparty.2DA~  ~%USER_DIRECTORY%/characters/d2partyaddermarker~
+
+/*
+*/

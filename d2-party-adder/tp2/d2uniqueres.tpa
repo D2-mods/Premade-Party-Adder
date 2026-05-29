@@ -1,0 +1,32 @@
+/*
+get new resource if current resource already exists
+otherwise returns current resource
+*/
+
+
+//res = current resource, ext = extension
+//newres is updated resource, newfile includes extension
+DEFINE_ACTION_FUNCTION d2uniqueres INT_VAR limit=1000 STR_VAR res=~~ ext=~~ prefix=d2pc RET newres newfile BEGIN
+
+  ACTION_IF !(~%ext%~ STR_EQ ~~) BEGIN
+    OUTER_SPRINT newres  ~%res%~
+    OUTER_SPRINT newfile  ~%res%.%ext%~
+
+    OUTER_SET check = 0
+    OUTER_FOR (n = 1; n <= limit; ++n) BEGIN
+      ACTION_IF (check = 0) BEGIN
+        OUTER_SPRINT resnum  ~%prefix%%n%~
+        ACTION_IF !(FILE_EXISTS_IN_GAME ~%resnum%.%ext%~) BEGIN
+          OUTER_SPRINT newres  ~%resnum%~
+          OUTER_SPRINT newfile  ~%newres%.%ext%~
+          OUTER_SET check = 1
+        END
+      END
+    END
+  END
+
+END
+
+
+//
+//

@@ -63,13 +63,20 @@ Tools and Resources:
 - NearInfinity (https://github.com/Argent77/NearInfinity)
 - Notepad++ (https://notepad-plus-plus.org/)
 - Git Bash (https://git-scm.com/downloads)
-- Infinity Auto Packager (https://github.com/InfinityTools/InfinityAutoPackager)
+- WeiDU Mod Packager (https://github.com/InfinityTools/WeiduModPackager)
 - IESDP (https://gibberlings3.github.io/iesdp/main.htm)
 
 
 ==================================================
 Version info
 ==================================================
+v1.5
+- the installer will now use a unique CRE resource if it already exists (when converting the CHR to CRE in the override). Previously, it always named the CREs the same as the CHRs from the mod folder, which could overwrite an existing CRE if you didn't use a unique name. Any CREs named in this way will have "d2pc" as the prefix (d2pc1, d2pc2, etc.).
+- note: the resource change does not apply to the CHR that gets copied to the Characters folder in Documents. That one will still overwrite an existing CHR.
+
+v1.4
+- EET: can now install separate default parties for Black Pits 1 and 2.
+
 v1.3
 - Small update for Component 3 (Biography fix): Fixed an issue that could prevent the generic biography from being written into a CHR file. This would happen if trying to patch a CHR file created with the Export button, but also without a .BIO file (i.e. you deleted the BIO because you wanted the generic biography from this mod). This bug did not affect pregenerated characters, only exported ones.
 

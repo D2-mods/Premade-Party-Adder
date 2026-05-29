@@ -10,8 +10,12 @@
 @8 = ~Choose a party for The Black Pits~
 @9 = ~Patch CHR files to fix biography bug when importing (IWD:EE)~
 
-@10 = ~Component not available for this game~
+@10 = ~~
 @11 = ~No CHR files in party folder~
+
+//eet alts
+@81 = ~Choose a party for The Black Pits (EET)~
+@82 = ~Choose a party for The Black Pits II (EET)~
 
 
 
