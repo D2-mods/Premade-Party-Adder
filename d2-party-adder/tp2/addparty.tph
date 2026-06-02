@@ -13,14 +13,8 @@ ACTION_BASH_FOR ~%MOD_FOLDER%/%party%~  ~.*\.chr~ BEGIN
 
   // change CRE resource if it already exists
   OUTER_SPRINT pcres  ~%BASH_FOR_RES%~
-  OUTER_SET checkres = 0
-  ACTION_IF (FILE_EXISTS_IN_GAME ~%pcres%.cre~) BEGIN
-    OUTER_SET checkres = 1
-  END
-  ACTION_IF (checkres > 0) BEGIN
-    LAF d2uniqueres STR_VAR res=EVAL ~%pcres%~ ext=cre RET newres END
-    OUTER_SPRINT pcres  ~%newres%~
-  END
+  LAF d2uniqueres STR_VAR res=EVAL ~%pcres%~ ext=cre prefix=d2pc RET newres END
+  OUTER_SPRINT pcres  ~%newres%~
 
   // copy to override as CRE file
   COPY ~%BASH_FOR_FILESPEC%~  ~override/%pcres%.cre~

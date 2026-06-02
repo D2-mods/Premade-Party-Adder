@@ -70,6 +70,10 @@ Tools and Resources:
 ==================================================
 Version info
 ==================================================
+v1.6
+- internal improvements.
+- no change to mod features.
+
 v1.5
 - the installer will now use a unique CRE resource if it already exists (when converting the CHR to CRE in the override). Previously, it always named the CREs the same as the CHRs from the mod folder, which could overwrite an existing CRE if you didn't use a unique name. Any CREs named in this way will have "d2pc" as the prefix (d2pc1, d2pc2, etc.).
 - note: the resource change does not apply to the CHR that gets copied to the Characters folder in Documents. That one will still overwrite an existing CHR.
